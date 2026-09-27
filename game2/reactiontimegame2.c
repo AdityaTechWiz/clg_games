@@ -26,8 +26,8 @@ void print_stat_bar(int value, int max_val) {
     int filled = (value * bar_width) / max_val;
     printf("[");
     for (int i = 0; i < bar_width; i++) {
-        if (i < filled) printf(COLOR_CYAN "█" COLOR_RESET);
-        else printf(COLOR_DIM "░" COLOR_RESET);
+        if (i < filled) printf(COLOR_CYAN "�" COLOR_RESET);
+        else printf(COLOR_DIM "�" COLOR_RESET);
     }
     printf("] %d/%d\n", value, max_val);
 }
@@ -40,9 +40,9 @@ int main() {
     int tap_status[TOTAL_TAPS];
 
     printf("\n" COLOR_CYAN);
-    printf("╔══════════════════════════════════════════════════════════╗\n");
-    printf("║                ⚡ SPEED TAP SPEEDRUN ⚡                   ║\n");
-    printf("╚══════════════════════════════════════════════════════════╝\n" COLOR_RESET);
+    printf("+----------------------------------------------------------+\n");
+    printf("�                ? SPEED TAP SPEEDRUN ?                   �\n");
+    printf("+----------------------------------------------------------+\n" COLOR_RESET);
     printf("Instructions: Alternate between " COLOR_YELLOW "[Z]" COLOR_RESET " and " COLOR_BLUE "[X]" COLOR_RESET " as fast as possible!\n");
     printf(COLOR_DIM "Press ENTER to begin..." COLOR_RESET);
     while (getchar() != '\n');
@@ -85,21 +85,21 @@ int main() {
     double accuracy = ((double)correct_taps / TOTAL_TAPS) * 100.0;
 
     printf("\n" COLOR_CYAN);
-    printf("╔══════════════════════════════════════════════════════════╗\n");
-    printf("║                  FINAL TAP SCORECARD                     ║\n");
-    printf("╚══════════════════════════════════════════════════════════╝\n" COLOR_RESET);
+    printf("+----------------------------------------------------------+\n");
+    printf("�                  FINAL TAP SCORECARD                     �\n");
+    printf("+----------------------------------------------------------+\n" COLOR_RESET);
 
-    printf(COLOR_BOLD "┌───────┬──────────────┬───────────────┐\n");
-    printf("│  Tap  │  Split (sec) │    Status     │\n");
-    printf("├───────┼──────────────┼───────────────┤\n" COLOR_RESET);
+    printf(COLOR_BOLD "+--------------------------------------+\n");
+    printf("�  Tap  �  Split (sec) �    Status     �\n");
+    printf("+-------+--------------+---------------�\n" COLOR_RESET);
 
     for (int i = 0; i < TOTAL_TAPS; i++) {
-        printf("│  %2d   │    %6.2fs    │   %s   │\n",
+        printf("�  %2d   �    %6.2fs    �   %s   �\n",
                i + 1,
                split_times[i],
-               tap_status[i] ? COLOR_GREEN "✔ ACCURATE" COLOR_RESET : COLOR_RED "✘ MISSED  " COLOR_RESET);
+               tap_status[i] ? COLOR_GREEN "? ACCURATE" COLOR_RESET : COLOR_RED "? MISSED  " COLOR_RESET);
     }
-    printf(COLOR_BOLD "└───────┴──────────────┴───────────────┘\n\n" COLOR_RESET);
+    printf(COLOR_BOLD "+--------------------------------------+\n\n" COLOR_RESET);
 
     printf(COLOR_BOLD "Accuracy:       " COLOR_RESET);
     print_stat_bar(correct_taps, TOTAL_TAPS);
@@ -108,16 +108,16 @@ int main() {
 
     printf("\n" COLOR_BOLD "Agility Tier:   " COLOR_RESET);
     if (correct_taps == TOTAL_TAPS && taps_per_sec >= 4.0) {
-        printf(COLOR_CYAN "⚡ CYBORG DIGITS (Insane CPS!)\n" COLOR_RESET);
+        printf(COLOR_CYAN "? CYBORG DIGITS (Insane CPS!)\n" COLOR_RESET);
     } else if (correct_taps >= 8 && taps_per_sec >= 2.5) {
-        printf(COLOR_GREEN "🏆 RHYTHM MASTER (Fluid & Rapid)\n" COLOR_RESET);
+        printf(COLOR_GREEN "?? RHYTHM MASTER (Fluid & Rapid)\n" COLOR_RESET);
     } else if (correct_taps >= 6) {
-        printf(COLOR_YELLOW "⭐ CASUAL TAPPER (Steady Pace)\n" COLOR_RESET);
+        printf(COLOR_YELLOW "? CASUAL TAPPER (Steady Pace)\n" COLOR_RESET);
     } else {
-        printf(COLOR_RED "💤 KEYBOARD STUMBLER (Hands Froze Up!)\n" COLOR_RESET);
+        printf(COLOR_RED "?? KEYBOARD STUMBLER (Hands Froze Up!)\n" COLOR_RESET);
     }
 
-    printf(COLOR_DIM "\n──────────────────────────────────────────────────────────\n" COLOR_RESET);
+    printf(COLOR_DIM "\n----------------------------------------------------------\n" COLOR_RESET);
     printf("Run again to push your taps-per-second higher!\n\n");
 
     return 0;
